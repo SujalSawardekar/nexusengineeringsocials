@@ -3,20 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Engineering | Review & Contact</title>
+    <title>Nexus Engineering | Social Hub</title>
     
     <!-- SEO & Visual Meta -->
-    <meta name="description" content="Share your experience with Nexus Engineering. Trusted precision engineering solutions specialized in quality and innovation.">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="Connecting safety to every corner. Official social hub for Nexus Engineering - Precision engineering solutions.">
+    <meta name="theme-color" content="#ffffff">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #ef4444; /* Nexus Red */
+            --bg-page: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --white: #ffffff;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius: 1.25rem;
+            --icon-bg: #fff1f2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-page);
+            background-image: 
+                radial-gradient(circle at 1px 1px, #e5e7eb 1px, transparent 0);
+            background-size: 40px 40px;
+            color: var(--text-main);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 580px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Header Section --- */
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            width: 100%;
+        }
+
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 2rem;
+            background: var(--white);
+            padding: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white);
+            border: 1px solid #fee2e2;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.05);
+        }
+
+        .badge .dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .tagline {
+            font-size: 1.125rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .tagline strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* --- Hub Links --- */
+        .hub-links {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 1.25rem;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-hover-shadow);
+            border-color: rgba(239, 68, 68, 0.1);
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .icon-box {
+            width: 54px;
+            height: 54px;
+            background: var(--icon-bg);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .icon-box {
+            transform: scale(1.05);
+        }
+
+        .text-group h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.15rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .text-group p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .action-arrow {
+            width: 36px;
+            height: 36px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .action-arrow {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateX(3px);
+        }
+
+        /* --- Featured Card --- */
+        .card.featured {
+            background: linear-gradient(to bottom, #ffffff, #fffafa);
+            border: 1px solid #fee2e2;
+        }
+
+        .visit-btn {
+            background: #fee2e2;
+            color: var(--primary);
+            padding: 0.6rem 1.25rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card.featured:hover .visit-btn {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* --- Icons --- */
+        .fb-icon { color: #1877F2; background: #e7f3ff; }
+        .ig-icon { color: #E4405F; background: #fff0f3; }
+        .li-icon { color: #0077B5; background: #e0f2fe; }
+        .yt-icon { color: #FF0000; background: #fff1f2; }
+        .wa-icon { color: #25D366; background: #ecfdf5; }
+        .map-icon { color: #4285F4; background: #ebf2ff; }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            padding-bottom: 2rem;
+        }
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* --- Mobile Adjustments --- */
+        @media (max-width: 480px) {
+            .logo { width: 100px; height: 100px; }
+            .tagline { font-size: 1rem; }
+            .text-group h3 { font-size: 0.95rem; }
+            .card { padding: 1rem; }
+            .icon-box { width: 48px; height: 48px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo-container reveal">
+                <div class="logo-glow"></div>
+                <img src="1.png" alt="Nexus Engineering Logo" class="logo">
+            </div>
+            <div class="reveal">
+                <div class="badge">
+                    <span class="dot"></span>
+                    Official Social Hub
+                </div>
+            </div>
+            <p class="tagline reveal">
+                Connecting safety to every corner — Follow our journey across every platform. 
+                <strong>Stay safe, stay connected.</strong>
+            </p>
+        </header>
+
+        <main class="hub-links">
+            <!-- Official Website -->
+            <a href="https://www.nexusengineering.in/" target="_blank" class="card featured reveal">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <i data-lucide="globe"></i>
+                    </div>
+                    <div class="text-group">
+                        <h3>Official Website</h3>
+                        <p>www.nexusengineering.in</p>
+                    </div>
+                </div>
+                <div class="visit-btn">
+                    Visit Site <i data-lucide="arrow-right" class="size-4"></i>
+                </div>
+            </a>
+
+            <!-- Google Maps -->
+            <a href="https://maps.app.goo.gl/HWLGBfa3dPiCcX328" target="_blank" class="card reveal">
+                <div class="card-content">
+                    <div class="icon-box map-icon">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <div class="text-group">
+                        <h3>Locate Us</h3>
+                        <p>Find us on Google Maps & Reviews</p>
+                    </div>
+                </div>
+                <div class="action-arrow">
+                    <i data-lucide="chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/919987025028" target="_blank" class="card reveal">
+                <div class="card-content">
+                    <div class="icon-box wa-icon">
+                        <i class="fa-brands fa-whatsapp fa-xl"></i>
+                    </div>
+                    <div class="text-group">
+                        <h3>WhatsApp Business</h3>
+                        <p>Direct chat for quick assistance</p>
+                    </div>
+                </div>
+                <div class="action-arrow">
+                    <i data-lucide="chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/profile.php?id=61574339204988" target="_blank" class="card reveal">
+                <div class="card-content">
+                    <div class="icon-box fb-icon">
+                        <i class="fa-brands fa-facebook-f fa-lg"></i>
+                    </div>
+                    <div class="text-group">
+                        <h3>Facebook</h3>
+                        <p>Updates, offers & community discussions</p>
+                    </div>
+                </div>
+                <div class="action-arrow">
+                    <i data-lucide="chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/nexusengineeringg/?hl=en" target="_blank" class="card reveal">
+                <div class="card-content">
+                    <div class="icon-box ig-icon">
+                        <i class="fa-brands fa-instagram fa-xl"></i>
+                    </div>
+                    <div class="text-group">
+                        <h3>Instagram</h3>
+                        <p>Behind the scenes & project highlights</p>
+                    </div>
+                </div>
+                <div class="action-arrow">
+                    <i data-lucide="chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/company/nexus-engineeringg/" target="_blank" class="card reveal">
+                <div class="card-content">
+                    <div class="icon-box li-icon">
+                        <i class="fa-brands fa-linkedin-in fa-lg"></i>
+                    </div>
+                    <div class="text-group">
+                        <h3>LinkedIn</h3>
+                        <p>Industry news & professional networking</p>
+                    </div>
+                </div>
+                <div class="action-arrow">
+                    <i data-lucide="chevron-right"></i>
+                </div>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@NexusEngineering-w5u" target="_blank" class="card reveal">
+                <div class="card-content">
+                    <div class="icon-box yt-icon">
+                        <i class="fa-brands fa-youtube fa-lg"></i>
+                    </div>
+                    <div class="text-group">
+                        <h3>YouTube</h3>
+                        <p>Video showcases & safety demonstrations</p>
+                    </div>
+                </div>
+                <div class="action-arrow">
+                    <i data-lucide="chevron-right"></i>
+                </div>
+            </a>
+
+        </main>
+
+        <footer>
+            <div class="reveal">
+                <p>&copy; 2025 Nexus Engineering. All rights reserved.</p>
+                <p style="margin-top: 0.5rem; font-weight: 500;">
+                    <a href="https://www.nexusengineering.in/" style="text-decoration: none; color: inherit;">nexusengineering.in</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Reveal Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.to(".reveal", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power2.out"
+            });
+        });
+    </script>
+</body>
+</html>
 
     <style>
         :root {
