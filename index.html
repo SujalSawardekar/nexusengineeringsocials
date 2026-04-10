@@ -209,6 +209,11 @@
             transform: scale(1.05);
         }
 
+        .text-group {
+            flex: 1;
+            min-width: 0;
+        }
+
         .text-group h3 {
             font-size: 0.9rem;
             font-weight: 700;
@@ -256,14 +261,16 @@
         .visit-btn {
             background: #fee2e2;
             color: var(--primary);
-            padding: 0.6rem 1.25rem;
+            padding: 0.6rem 1rem;
             border-radius: 2rem;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .card.featured:hover .visit-btn {
@@ -370,11 +377,19 @@
         @media (max-width: 480px) {
             .hub-links { grid-template-columns: repeat(1, 1fr); }
             .card.featured, .card.review-card { grid-column: auto; }
-            .logo { width: 100px; height: 100px; }
-            .tagline { font-size: 1rem; }
-            .text-group h3 { font-size: 0.95rem; }
-            .card { padding: 1.25rem; }
-            .icon-box { width: 48px; height: 48px; }
+            .card.featured {
+                flex-direction: row; /* Keep row but ensure it fits */
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .card.featured .row-layout {
+                gap: 0.75rem;
+            }
+            .logo { width: 90px; height: 90px; }
+            .tagline { font-size: 0.95rem; }
+            .text-group h3 { font-size: 0.9rem; }
+            .card { padding: 1.15rem; }
+            .icon-box { width: 44px; height: 44px; flex-shrink: 0; }
         }
     </style>
 </head>
