@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Engineering | Social Hub</title>
-    
+    <title>Nexus Engineering | Review & Contact</title>
+
     <!-- SEO & Visual Meta -->
-    <meta name="description" content="Connecting safety to every corner. Official social hub for Nexus Engineering - Precision engineering solutions.">
-    <meta name="theme-color" content="#ffffff">
-    
+    <meta name="description"
+        content="Share your experience with Nexus Engineering. Trusted precision engineering solutions specialized in quality and innovation.">
+    <meta name="theme-color" content="#0f172a">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="icon" type="image/png" href="1.png">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <style>
         :root {
-            --primary: #ef4444; /* Nexus Red */
-            --bg-page: #f9fafb;
-            --text-main: #111827;
-            --text-muted: #6b7280;
+            --primary: #0f172a;
+            /* Deep Navy */
+            --primary-light: #1e293b;
+            --secondary: #fbbf24;
+            /* Amber/Gold */
+            --accent-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --background: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
             --white: #ffffff;
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --radius: 1.25rem;
-            --icon-bg: #fff1f2;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 25px -5px rgb(0 0 0 / 0.1);
+            --radius-lg: 1.5rem;
+            --radius-md: 1rem;
         }
 
         * {
@@ -41,522 +48,461 @@
         }
 
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-page);
-            background-image: 
-                radial-gradient(circle at 1px 1px, #e5e7eb 1px, transparent 0);
-            background-size: 40px 40px;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
             color: var(--text-main);
-            line-height: 1.5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 2rem 1rem;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* --- Layout Utils --- */
         .container {
-            width: 100%;
-            max-width: 580px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 3rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .section.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: var(--accent-gradient);
+            color: var(--white);
+            padding: 5rem 0 4rem;
+            text-align: center;
+            border-bottom-left-radius: 3rem;
+            border-bottom-right-radius: 3rem;
+            position: relative;
+            overflow: hidden;
+            opacity: 1;
+            /* Hero appears faster */
+            transform: none;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -0.025em;
+        }
+
+        .hero .stars {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            font-weight: 300;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 1.25rem 2rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+        }
+
+        .btn-cta:active {
+            transform: scale(0.98);
+        }
+
+        /* --- Quick Actions --- */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .action-card {
+            background: var(--white);
+            padding: 1.5rem 1rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 0.75rem;
         }
 
-        /* --- Header Section --- */
-        header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            width: 100%;
+        .action-card i,
+        .action-card .lucide {
+            width: 32px;
+            height: 32px;
+            color: var(--primary);
         }
 
-        .logo-container {
-            position: relative;
-            display: inline-block;
+        .action-card span {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            background: #f1f5f9;
+        }
+
+        /* --- About Section --- */
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
             margin-bottom: 1.5rem;
         }
 
-        .logo-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 140%;
-            height: 140%;
-            background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
-            z-index: -1;
-            border-radius: 50%;
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            object-fit: contain;
-            border-radius: 2rem;
-            background: var(--white);
-            padding: 1.1rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-        }
-
-        .badge {
-            display: inline-flex;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--white);
-            border: 1px solid #fee2e2;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
             color: var(--primary);
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.05);
         }
 
-        .badge .dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .tagline {
-            font-size: 1.125rem;
-            font-weight: 400;
+        .about p {
             color: var(--text-muted);
-            max-width: 400px;
-            margin: 0 auto;
-            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
         }
 
-        .tagline strong {
-            color: var(--text-main);
+        .about a.web-link {
+            color: var(--primary);
             font-weight: 600;
-        }
-
-        /* --- Hub Links --- */
-        .hub-links {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .card {
-            background: var(--white);
-            padding: 1.15rem;
-            border-radius: var(--radius);
-            display: flex;
-            flex-direction: column;
+            display: inline-flex;
             align-items: center;
+            gap: 0.25rem;
+            border-bottom: 1px solid var(--secondary);
+        }
+
+        /* --- Contact Section --- */
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-item i {
+            color: var(--secondary);
+            margin-top: 0.25rem;
+            width: 20px;
             text-align: center;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.02);
-            gap: 1rem;
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--card-hover-shadow);
-            border-color: rgba(239, 68, 68, 0.1);
+        .contact-item .label {
+            font-weight: 700;
+            min-width: 80px;
+            display: block;
         }
 
-        .row-layout {
+        .contact-item .value {
+            color: var(--text-muted);
+        }
+
+        /* --- Social Links --- */
+        .social-grid {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            width: 100%;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
         }
 
-        .icon-box {
+        .social-btn {
             width: 50px;
             height: 50px;
-            background: #f3f4f6;
-            border-radius: 1rem;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #4b5563;
-            transition: transform 0.3s ease;
-        }
-
-        /* --- Icons --- */
-        .fb-icon { color: #1877F2; background: #e7f3ff; }
-        .ig-icon { color: #E4405F; background: #fff0f3; }
-        .li-icon { color: #0077B5; background: #e0f2fe; }
-        .yt-icon { color: #FF0000; background: #fff1f2; }
-        .wa-icon { color: #25D366; background: #ecfdf5; }
-        .map-icon { color: #4285F4; background: #ebf2ff; }
-        .globe-icon { color: #ef4444; background: #fff1f2; }
-
-        .card:hover .icon-box {
-            transform: scale(1.05);
-        }
-
-        .text-group {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .text-group h3 {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 0.15rem;
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-        }
-
-        .text-group p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            line-height: 1.3;
-        }
-
-        .action-arrow {
-            display: none; /* Removed for grid layout to save space */
-        }
-
-        /* --- Featured Card (Full Width) --- */
-        .card.featured {
-            grid-column: span 2;
-            flex-direction: row;
-            justify-content: space-between;
-            text-align: left;
-            padding: 1.25rem;
-            background: linear-gradient(to bottom, #ffffff, #fffafa);
-            border: 1px solid #fee2e2;
-        }
-
-        .card.featured .row-layout {
-            flex-direction: row;
-            justify-content: flex-start;
-        }
-
-        .card.featured .text-group h3 {
-            font-size: 1.05rem;
-        }
-
-        .card.featured .text-group p {
-            font-size: 0.875rem;
-        }
-
-        .visit-btn {
-            background: #fee2e2;
-            color: var(--primary);
-            padding: 0.6rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.8rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .card.featured:hover .visit-btn {
-            background: var(--primary);
+            font-size: 1.25rem;
             color: var(--white);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-md);
         }
 
-        /* --- Review Section --- */
-        .card.review-card {
-            grid-column: span 2;
-            background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);
-            border: 1px solid #fde68a;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            align-items: center;
-            text-align: center;
+        .social-btn:hover {
+            transform: translateY(-5px) rotate(8deg);
         }
 
-        .rating-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+        .instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         }
 
-        .rating-score {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #b45309;
+        .facebook {
+            background: #1877F2;
         }
 
-        .stars-container {
-            display: flex;
-            gap: 0.25rem;
-            color: #fbbf24;
+        .linkedin {
+            background: #0077b5;
         }
 
-        .star-anim {
-            animation: starBounce 2s infinite ease-in-out;
+        .youtube {
+            background: #FF0000;
         }
 
-        @keyframes starBounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-
-        .review-text {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            max-width: 320px;
-        }
-
-        .btn-review {
-            background: #fbbf24;
-            color: #78350f;
-            padding: 0.75rem 2rem;
-            border-radius: 2rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            outline: none;
-        }
-
-        .btn-review:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
-            background: #f59e0b;
-        }
-
-        .glow-pulse {
-            animation: glowPulse 2s infinite;
-        }
-
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+        .whatsapp {
+            background: #25D366;
         }
 
         /* --- Footer --- */
         footer {
-            margin-top: 4rem;
             text-align: center;
+            padding: 3rem 0;
             color: var(--text-muted);
             font-size: 0.875rem;
-            padding-bottom: 2rem;
         }
 
-        /* --- Animations --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
+        footer a {
+            color: var(--primary);
+            font-weight: 600;
         }
 
-        /* --- Mobile Adjustments --- */
-        /* --- Mobile Adjustments --- */
+        /* --- Mobile Responsive --- */
         @media (max-width: 480px) {
-            .hub-links { grid-template-columns: repeat(1, 1fr); }
-            .card.featured, .card.review-card { grid-column: auto; }
-            .card.featured {
-                flex-direction: row; /* Keep row but ensure it fits */
-                align-items: center;
+            .hero h1 {
+                font-size: 1.875rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(1, 1fr);
                 gap: 0.75rem;
             }
-            .card.featured .row-layout {
-                gap: 0.75rem;
+
+            .action-card {
+                flex-direction: row;
+                justify-content: center;
+                padding: 1.25rem;
             }
-            .logo { width: 90px; height: 90px; }
-            .tagline { font-size: 0.95rem; }
-            .text-group h3 { font-size: 0.9rem; }
-            .card { padding: 1.15rem; }
-            .icon-box { width: 44px; height: 44px; flex-shrink: 0; }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="container">
-        <header>
-            <div class="logo-container reveal">
-                <div class="logo-glow"></div>
-                <img src="1.png" alt="Nexus Engineering Logo" class="logo">
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container" id="hero-content">
+            <h1>Share Your Experience</h1>
+            <div class="stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
             </div>
-            <div class="reveal">
-                <div class="badge">
-                    <span class="dot"></span>
-                    Official Social Hub
-                </div>
-            </div>
-            <p class="tagline reveal">
-                Connecting safety to every corner<br>
-                Follow our journey across every platform.<br>
-                <strong>Stay safe, stay connected.</strong>
-            </p>
-        </header>
-
-        <main class="hub-links">
-            <!-- Official Website -->
-            <a href="https://www.nexusengineering.in/" target="_blank" class="card featured reveal">
-                <div class="row-layout">
-                    <div class="icon-box globe-icon">
-                        <i data-lucide="globe"></i>
-                    </div>
-                    <div class="text-group">
-                        <h3>Official Website</h3>
-                        <p>www.nexusengineering.in</p>
-                    </div>
-                </div>
-                <div class="visit-btn">
-                    Visit <i data-lucide="arrow-right" class="size-4"></i>
-                </div>
+            <p>Loved our service? Tell the world! Your review helps us grow and serve you better.</p>
+            <a href="https://maps.app.goo.gl/HWLGBfa3dPiCcX328" target="_blank" class="btn-cta">
+                <i class="fa-brands fa-google"></i>
+                Review on Google Maps
             </a>
+        </div>
+    </header>
 
-            <!-- Google Maps -->
-            <a href="https://maps.app.goo.gl/HWLGBfa3dPiCcX328" target="_blank" class="card reveal">
-                <div class="row-layout">
-                    <div class="icon-box map-icon">
-                        <i data-lucide="map-pin"></i>
-                    </div>
-                    <div class="text-group">
-                        <h3>Locate Us</h3>
-                        <p>Google Maps & Reviews</p>
-                    </div>
-                </div>
+    <main class="container">
+        <!-- Quick Actions Grid -->
+        <section class="quick-actions section">
+            <a href="tel:+919987025028" class="action-card">
+                <i data-lucide="phone-call"></i>
+                <span>Call Now</span>
             </a>
-
-            <!-- WhatsApp -->
-            <a href="https://wa.me/919987025028" target="_blank" class="card reveal">
-                <div class="row-layout">
-                    <div class="icon-box wa-icon">
-                        <i class="fa-brands fa-whatsapp fa-xl"></i>
-                    </div>
-                    <div class="text-group">
-                        <h3>WhatsApp</h3>
-                        <p>Direct Business Chat</p>
-                    </div>
-                </div>
+            <a href="https://maps.app.goo.gl/HWLGBfa3dPiCcX328" target="_blank" class="action-card">
+                <i data-lucide="map-pin"></i>
+                <span>Open in Maps</span>
             </a>
-
-            <!-- Facebook -->
-            <a href="https://www.facebook.com/profile.php?id=61574339204988" target="_blank" class="card reveal">
-                <div class="row-layout">
-                    <div class="icon-box fb-icon">
-                        <i class="fa-brands fa-facebook-f fa-lg"></i>
-                    </div>
-                    <div class="text-group">
-                        <h3>Facebook</h3>
-                        <p>Updates & Offers</p>
-                    </div>
-                </div>
+            <a href="https://wa.me/919987025028" target="_blank" class="action-card">
+                <i data-lucide="message-circle"></i>
+                <span>WhatsApp Chat</span>
             </a>
+        </section>
 
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/nexusengineeringg/?hl=en" target="_blank" class="card reveal">
-                <div class="row-layout">
-                    <div class="icon-box ig-icon">
-                        <i class="fa-brands fa-instagram fa-xl"></i>
-                    </div>
-                    <div class="text-group">
-                        <h3>Instagram</h3>
-                        <p>Project Highlights</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- LinkedIn -->
-            <a href="https://linkedin.com/company/nexus-engineeringg/" target="_blank" class="card reveal">
-                <div class="row-layout">
-                    <div class="icon-box li-icon">
-                        <i class="fa-brands fa-linkedin-in fa-lg"></i>
-                    </div>
-                    <div class="text-group">
-                        <h3>LinkedIn</h3>
-                        <p>Professional Hub</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- YouTube -->
-            <a href="https://www.youtube.com/@NexusEngineering-w5u" target="_blank" class="card reveal">
-                <div class="row-layout">
-                    <div class="icon-box yt-icon">
-                        <i class="fa-brands fa-youtube fa-lg"></i>
-                    </div>
-                    <div class="text-group">
-                        <h3>YouTube</h3>
-                        <p>Video Showcases</p>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Google Review Section (Now at the Bottom) -->
-            <div class="card review-card reveal">
-                <div class="rating-header">
-                    <span class="rating-score">5.0</span>
-                    <div class="stars-container">
-                        <i class="fa-solid fa-star star-anim" style="animation-delay: 0s"></i>
-                        <i class="fa-solid fa-star star-anim" style="animation-delay: 0.2s"></i>
-                        <i class="fa-solid fa-star star-anim" style="animation-delay: 0.4s"></i>
-                        <i class="fa-solid fa-star star-anim" style="animation-delay: 0.6s"></i>
-                        <i class="fa-solid fa-star star-anim" style="animation-delay: 0.8s"></i>
-                    </div>
-                </div>
-                <div class="text-group">
-                    <h3 style="color: #b45309; margin-bottom: 0.5rem;">Trust Excellence</h3>
-                    <p class="review-text">Your satisfaction drives our precision. Join 100+ happy clients sharing their journey.</p>
-                </div>
-                <a href="https://maps.app.goo.gl/HWLGBfa3dPiCcX328" target="_blank" class="btn-review glow-pulse">
-                    <i class="fa-brands fa-google"></i>
-                    WRITE A GOOGLE REVIEW
+        <!-- About Section -->
+        <section class="about section">
+            <div class="card">
+                <h2 class="section-title"><i data-lucide="info"></i> About Us</h2>
+                <p>Nexus Engineering is a trusted name in precision engineering solutions, committed to quality,
+                    innovation, and customer satisfaction. We serve industries with excellence and reliability.</p>
+                <a href="https://www.nexusengineering.in/" target="_blank" class="web-link">
+                    Visit Website <i data-lucide="arrow-up-right"></i>
                 </a>
             </div>
+        </section>
 
-        </main>
-
-        <footer>
-            <div class="reveal">
-                <p>&copy; 2026 Nexus Engineering. All rights reserved.</p>
-                <p style="margin-top: 0.5rem; font-weight: 500;">
-                    <a href="https://www.nexusengineering.in/" style="text-decoration: none; color: inherit;">nexusengineering.in</a>
-                </p>
+        <!-- Contact Section -->
+        <section class="contact section">
+            <div class="card">
+                <h2 class="section-title"><i data-lucide="contact-2"></i> Contact Details</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <span class="label">Phone:</span>
+                            <span class="value">+91 99870 25028</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <span class="label">Address:</span>
+                            <span class="value">Nexus Engineering, India</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-globe"></i>
+                        <div>
+                            <span class="label">Website:</span>
+                            <span class="value">nexusengineering.in</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </footer>
-    </div>
+        </section>
+
+        <!-- Social Section -->
+        <section class="socials section">
+            <div class="card" style="text-align: center;">
+                <h2 class="section-title" style="justify-content: center;"><i data-lucide="share-2"></i> Follow Us</h2>
+                <div class="social-grid">
+                    <a href="https://www.instagram.com/nexusengineeringg/?hl=en" target="_blank"
+                        class="social-btn instagram" title="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61574339204988" target="_blank"
+                        class="social-btn facebook" title="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/nexus-engineeringg/" target="_blank"
+                        class="social-btn linkedin" title="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@NexusEngineering-w5u" target="_blank" class="social-btn youtube"
+                        title="YouTube">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <a href="https://wa.me/919987025028" target="_blank" class="social-btn whatsapp" title="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Nexus Engineering. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;"><a href="https://www.nexusengineering.in/"
+                    target="_blank">nexusengineering.in</a></p>
+        </div>
+    </footer>
 
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Reveal Animations
-        document.addEventListener('DOMContentLoaded', () => {
-            gsap.to(".reveal", {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                stagger: 0.1,
-                ease: "power2.out"
+        // Scroll Animation logic using Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    // Once animated, no need to observe anymore
+                    observer.unobserve(entry.target);
+                }
             });
+        }, observerOptions);
+
+        // Track all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add subtle entrance animation for hero content items
+        window.addEventListener('load', () => {
+            const heroContent = document.getElementById('hero-content');
+            heroContent.style.opacity = '0';
+            heroContent.style.transform = 'translateY(20px)';
+            heroContent.style.transition = 'all 1s ease-out';
+
+            setTimeout(() => {
+                heroContent.style.opacity = '1';
+                heroContent.style.transform = 'translateY(0)';
+            }, 100);
         });
     </script>
 </body>
+
 </html>
